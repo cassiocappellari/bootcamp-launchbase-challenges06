@@ -1,8 +1,6 @@
-// Implemente uma função que receba como parâmetro um número e, após x milissegundos (dentre um intervalo de 1 a 100 ms. Utilize o setTimeout e as funções floor e random da biblioteca Math), mostre no console o dobro do parâmetro recebido. Em seguida, chame essa função 5 vezes.
-
 // callback
 
-function printDouble(number, callback) {
+/* function printDouble(number, callback) {
     setTimeout(function() {
         console.log(number * 2)
         callback()
@@ -23,4 +21,30 @@ function printAll() {
     })
 }
 
-printAll()
+printAll() */
+
+// promises
+
+let printDoubleNumber = number => new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(number * 2)
+    },
+    Math.floor(Math.random() * 100) + 1
+    )
+})
+
+printDoubleNumber(5).then((results) => {
+    console.log(results)
+    printDoubleNumber(10).then((results) => {
+        console.log(results)
+        printDoubleNumber(22).then((results) => {
+            console.log(results)
+            printDoubleNumber(1).then((results) => {
+                console.log(results)
+                printDoubleNumber(89).then((results) => {
+                    console.log(results)
+                })
+            })
+        })
+    })
+})
