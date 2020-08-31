@@ -14,7 +14,11 @@ function printAll() {
         printDouble(10, () => {
             printDouble(22, () => {
                 printDouble(1, () => {
-                    printDouble(89, () => {})
+                    printDouble(89, () => {
+                        printDouble(50, () => {
+                            printDouble(100, () => {})
+                        })
+                    })
                 })
             })
         })
@@ -48,6 +52,14 @@ printDoubleNumber(1)
 printDoubleNumber(89)
 .then((results) => {
     console.log(results)
+printDoubleNumber(50)
+.then((results) => {
+    console.log(results)
+printDoubleNumber(100)
+.then((results) => {
+    console.log(results)
+})
+})
 })
 })
 })
@@ -56,7 +68,7 @@ printDoubleNumber(89)
 
 // async/await
 
-async function printDoubleNumber(number) {
+/*async function printDoubleNumber(number) {
     return await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(number * 2)
@@ -76,6 +88,10 @@ const printAll = async () => {
     console.log(results)
     results = await printDoubleNumber(89)
     console.log(results)
+    results = await printDoubleNumber(50)
+    console.log(results)
+    results = await printDoubleNumber(100)
+    console.log(results)
 }
 
-printAll()
+printAll()*/
