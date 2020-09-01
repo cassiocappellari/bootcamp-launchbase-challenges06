@@ -52,18 +52,14 @@ results()*/
 
 function printDouble(number1, number2, callback) {
     setTimeout(() => {
-        console.log(number1 * 2 + number2)
-        callback()
+        const total = number1 * 2 + number2
+        console.log(total)
+        callback(total)
     }, Math.floor(Math.random() * 100) + 1)
 }
 
-const printAll = () => {
-    let result
-    result = printDouble(5, 0, () => {
-        result = printDouble(12, result, () => {
-            result = printDouble(2, result, () => {})
-        })
+printDouble(5, 0, (total) => {
+    printDouble(12, total, (total) => {
+        printDouble(2, total, () => {})
     })
-}
-
-printAll()
+})
