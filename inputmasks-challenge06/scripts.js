@@ -1,29 +1,36 @@
 const Mask = {
     apply(input, func) {
+        input.value = input.value.replace(/\D/g, '')
         setTimeout(() => {
             input.value = Mask[func](input.value)
         }, 1)
     },
     formatPercentage(value) {
-        value = value.replace(/\D/g, "")
+        let divide = 10000
 
-        console.log('Funcionando?')
-        return new Intl.NumberFormat({
-            style: "percent",
-            minimumIntegerDigits: 2
-        }).format(value)
+        const arr = value.split(',')
+
+        if(arr[1]){
+            const decimals = arr[1].split('%')[0].length
+            console.log(value, decimals)
+
+            if (decimals > 2)
+                divide = Math.pow(10, decimals + 2)
+        }
+
+        value = value.replace(/\D/g, '')
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'percent',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 4
+        }).format(value/divide)
     },
     formatCPF(value) {
-        value = value.replace(/\D/g, "")
+        value = value.replace(/\D/g,"")
+        value = value.replace(/(\d{3})(\d)/,"$1.$2")
+        value = value.replace(/(\d{3})(\d)/,"$1.$2")
+        value = value.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
 
-        console.log('Funcionando?')
-        return new Intl.NumberFormat({
-            style: "percent",
-            minimumIntegerDigits: 2
-        }).format(value)
+        return value
     }
 }
-
-// Número percentual com no mínimo duas casas após a vírgula e no máximo 4
-
-// caracteres > 2 && < 4
